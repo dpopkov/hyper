@@ -2,22 +2,23 @@ package learn.hyper.cinema;
 
 public class Cinema {
     public static void main(String[] args) {
-        System.out.println("Cinema:");
-        printRoom(7, 8);
+        System.out.print(makeRoom(7, 8));
     }
 
-    public static void printRoom(int rows, int seats) {
-        System.out.print(" ");
+    public static String makeRoom(int rows, int seats) {
+        StringBuilder sb = new StringBuilder();
+        final String nl = System.lineSeparator();
+        sb.append("Cinema:").append(nl);
+        sb.append(" ");
         for (int i = 1; i <= seats; i++) {
-            System.out.printf("%2d", i);
+            sb.append(String.format("%2d", i));
         }
-        System.out.println();
+        sb.append(nl);
         for (int i = 1; i <= rows; i++) {
-            System.out.printf("%d", i);
-            for (int j = 0; j < seats; j++) {
-                System.out.print(" S");
-            }
-            System.out.println();
+            sb.append(String.format("%d", i));
+            sb.append(" S".repeat(Math.max(0, seats)));
+            sb.append(nl);
         }
+        return sb.toString();
     }
 }
