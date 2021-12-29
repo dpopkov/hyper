@@ -28,3 +28,8 @@ hs_err_pid*
 
 # Maven's target
 target/
+
+# Text files
+utils/txt/
+# Test scripts
+utils/run-*.sh
