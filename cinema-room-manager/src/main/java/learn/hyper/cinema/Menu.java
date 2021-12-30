@@ -4,6 +4,7 @@ import java.io.PrintStream;
 import java.util.*;
 
 public class Menu {
+    private static final String NL = System.lineSeparator();
 
     private final List<String> names = new ArrayList<>();
     private final List<Action> actions = new ArrayList<>();
@@ -23,11 +24,7 @@ public class Menu {
     public void run() {
         boolean running = true;
         while (running) {
-            out.println();
-            for (int i = 0; i < actions.size(); i++) {
-                out.printf("%d. %s%n", (i + 1), names.get(i));
-            }
-            out.println("0. Exit");
+            out.println(asString());
             int cmd = in.nextInt();
             if (cmd == 0) {
                 running = false;
@@ -36,5 +33,15 @@ public class Menu {
                 action.execute();
             }
         }
+    }
+
+    public String asString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(NL);
+        for (int i = 0; i < actions.size(); i++) {
+            sb.append(String.format("%d. %s%n", (i + 1), names.get(i)));
+        }
+        sb.append("0. Exit");
+        return sb.toString();
     }
 }
