@@ -1,6 +1,7 @@
 package learn.hyper.cinema;
 
 import java.io.PrintStream;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Cinema {
@@ -13,6 +14,7 @@ public class Cinema {
     private final Calculator calculator;
     private final Scanner in;
     private final PrintStream out;
+    private int currentIncome;
 
     public Cinema(int rows, int seats, Scanner in, PrintStream out) {
         room = new Room(rows, seats);
@@ -34,13 +36,37 @@ public class Cinema {
         room.reserveSeat(rowNumber, seatNumber);
     }
 
-    private void buyTicket() {
+    public void printStatistics() {
         out.println();
-        int rowNumber = readInt("Enter a row number:", in);
-        int seatNumber = readInt("Enter a seat number in that row:", in);
+        final int purchased = room.getNumberOfPurchased();
+        out.println("Number of purchased tickets: " + purchased);
+        out.printf(Locale.US, "Percentage: %.2f%%%n", (purchased * 100.0 / room.totalSeats()));
+        out.printf("Current income: $%d%n", currentIncome);
+        out.printf("Total income: $%d%n", calculator.calculateIncome(room));
+    }
+
+    private void buyTicket() {
+        int rowNumber = -1;
+        int seatNumber = -1;
+        boolean inputInProgress = true;
+        while (inputInProgress) {
+            out.println();
+            rowNumber = readInt("Enter a row number:", in);
+            seatNumber = readInt("Enter a seat number in that row:", in);
+            if (rowNumber < 0 || rowNumber > room.getNumRows() || seatNumber < 0 || seatNumber > room.getNumSeats()) {
+                out.println();
+                out.println("Wrong input!");
+            } else if (room.isPurchased(rowNumber, seatNumber)) {
+                out.println();
+                out.println("That ticket has already been purchased!");
+            } else {
+                inputInProgress = false;
+            }
+        }
         int price = priceForSeat(rowNumber);
         reserveSeat(rowNumber, seatNumber);
-        out.printf("Ticket price: $%d%n", price);
+        currentIncome += price;
+        out.printf("%nTicket price: $%d%n", price);
     }
 
     public static void main(String[] args) {
@@ -52,6 +78,7 @@ public class Cinema {
         Menu menu = new Menu(in, System.out);
         menu.addAction("Show the seats", cinema::printArrangement);
         menu.addAction("Buy a ticket", cinema::buyTicket);
+        menu.addAction("Statistics", cinema::printStatistics);
         menu.run();
     }
 

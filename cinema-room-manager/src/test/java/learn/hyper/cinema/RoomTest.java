@@ -32,4 +32,11 @@ class RoomTest {
         String actual = room.formatAsString("Cinema:");
         assertEquals(expected, actual);
     }
+
+    @Test
+    void testIsPurchased() {
+        Room room = new Room(3, 4);
+        room.reserveSeat(2, 3);
+        assertTrue(room.isPurchased(2, 3));
+    }
 }

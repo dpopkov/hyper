@@ -10,6 +10,7 @@ public class Room {
     private final String freeSeatSymbol;
     private final String reservedSeatSymbol;
     private final String[][] seats;
+    private int numberOfPurchased;
 
     public Room(int numRows, int numSeats) {
         this(numRows, numSeats, DEFAULT_FREE_SEAT_SYMBOL, DEFAULT_RESERVED_SEAT_SYMBOL);
@@ -36,14 +37,24 @@ public class Room {
         return numRows * numSeats;
     }
 
+    public int getNumberOfPurchased() {
+        return numberOfPurchased;
+    }
+
     private void fillFree(String[][] allRows) {
         for (String[] row : allRows) {
             java.util.Arrays.fill(row, freeSeatSymbol);
         }
     }
 
+    public boolean isPurchased(int row, int seat) {
+        final String place = seats[row - 1][seat - 1];
+        return place != null && place.equals(reservedSeatSymbol);
+    }
+
     public void reserveSeat(int row, int seat) {
         seats[row - 1][seat - 1] = this.reservedSeatSymbol;
+        numberOfPurchased++;
     }
 
     public String formatAsString(String title) {

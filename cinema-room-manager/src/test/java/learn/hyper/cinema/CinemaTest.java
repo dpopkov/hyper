@@ -14,9 +14,9 @@ class CinemaTest {
 
     @ParameterizedTest
     @CsvSource({
-            "menuInput.txt,menuExpectedOutput.txt"
+            "statsInput.txt,statsOutput.txt"
     })
-    void testMainWithMenu(String inputFilename, String expectedOutputFilename) throws IOException {
+    void testMainWithStatistics(String inputFilename, String expectedOutputFilename) throws IOException {
         final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         InputStream savedIn = System.in;
         PrintStream savedOut = System.out;

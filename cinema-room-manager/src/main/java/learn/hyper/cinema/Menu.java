@@ -10,6 +10,8 @@ public class Menu {
     private final List<Action> actions = new ArrayList<>();
     private final Scanner in;
     private final PrintStream out;
+    private boolean dirty;
+    private String representation;
 
     public Menu(Scanner in, PrintStream out) {
         this.in = in;
@@ -19,6 +21,7 @@ public class Menu {
     public void addAction(String name, Action action) {
         names.add(name);
         actions.add(action);
+        dirty = true;
     }
 
     public void run() {
@@ -36,12 +39,16 @@ public class Menu {
     }
 
     public String asString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(NL);
-        for (int i = 0; i < actions.size(); i++) {
-            sb.append(String.format("%d. %s%n", (i + 1), names.get(i)));
+        if (dirty) {
+            StringBuilder sb = new StringBuilder();
+            sb.append(NL);
+            for (int i = 0; i < actions.size(); i++) {
+                sb.append(String.format("%d. %s%n", (i + 1), names.get(i)));
+            }
+            sb.append("0. Exit");
+            representation = sb.toString();
+            dirty = false;
         }
-        sb.append("0. Exit");
-        return sb.toString();
+        return representation;
     }
 }
