@@ -12,6 +12,7 @@
         <module>cinema-room-manager</module>
         <module>practice</module>
         <module>utils</module>
+        <module>simple-tic-tac-toe</module>
     </modules>
 
     <properties>
