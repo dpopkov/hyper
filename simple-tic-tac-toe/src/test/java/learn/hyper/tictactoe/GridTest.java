@@ -9,7 +9,7 @@ class GridTest {
 
     @Test
     void testInit() {
-        String representation = "X O\nO X";
+        String representation = "XOOX";
         Grid grid = new Grid(2);
         grid.init(representation);
         assertEquals(Grid.X, grid.getField(0, 0));
@@ -20,14 +20,45 @@ class GridTest {
 
     @Test
     void testAsString() {
-        String representation = "X O X\nO X O\nX X O";
+        String representation = "XOXO_OXXO";
         Grid grid = new Grid(3);
         grid.init(representation);
         String expected = ""
                 + "X O X" + NL
-                + "O X O" + NL
+                + "O _ O" + NL
                 + "X X O" + NL;
-        String actual = grid.asString();
+        String actual = grid.asString(false);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testAsStringFramed() {
+        String representation = "XOXO_OXXO";
+        Grid grid = new Grid(3);
+        grid.init(representation);
+        String expected = ""
+                + "---------" + NL
+                + "| X O X |" + NL
+                + "| O _ O |" + NL
+                + "| X X O |" + NL
+                + "---------" + NL;
+        String actual = grid.asString(true);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void testAsStringFramedSize4() {
+        String representation = "XOXO" + "_OXX" + "XXOO" + "_XO_";
+        Grid grid = new Grid(4);
+        grid.init(representation);
+        String expected = ""
+                + "-----------" + NL
+                + "| X O X O |" + NL
+                + "| _ O X X |" + NL
+                + "| X X O O |" + NL
+                + "| _ X O _ |" + NL
+                + "-----------" + NL;
+        String actual = grid.asString(true);
         assertEquals(expected, actual);
     }
 }
