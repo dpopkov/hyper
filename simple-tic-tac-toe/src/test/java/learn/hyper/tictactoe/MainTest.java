@@ -1,16 +1,21 @@
 package learn.hyper.tictactoe;
 
+import learn.hyper.utils.testing.AbstractMainTest;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MainTest {
+class MainTest extends AbstractMainTest {
+
+    @BeforeEach
+    void setUp() {
+        setupTest();
+    }
 
     @ParameterizedTest
     @CsvSource({
@@ -18,27 +23,16 @@ class MainTest {
             "example02-input.txt,example02-output.txt",
             "example03-input.txt,example03-output.txt"
     })
-    void testMain(String inputFile, String expectedOutputFilename) throws IOException {
-        final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        InputStream savedIn = System.in;
-        PrintStream savedOut = System.out;
-        String actual;
-        String expected;
+    void testMain(String inputFilename, String expectedOutputFilename) throws IOException {
+        Result result = runMainWithTestInputOutput(Main::main,
+                new String[0],
+                inputFilename,
+                expectedOutputFilename);
+        assertEquals(result.expected(), result.actual());
+    }
 
-        try (
-                InputStream input = Main.class.getResourceAsStream(inputFile);
-                InputStream expectedOutput = Main.class.getResourceAsStream(expectedOutputFilename)
-        ) {
-            System.setIn(input);
-            System.setOut(new PrintStream(buffer));
-
-            Main.main(null);
-
-            expected = new String(expectedOutput.readAllBytes());
-        }
-        System.setIn(savedIn);
-        System.setOut(savedOut);
-        actual = buffer.toString();
-        assertEquals(expected, actual);
+    @AfterEach
+    void tearDown() {
+        tearDownTest();
     }
 }
