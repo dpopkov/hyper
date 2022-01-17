@@ -5,3 +5,4 @@
 * Iterating over arrays - Alphabetical order: [src](src/main/java/learn/hyper/practice/AlphabeticalOrder.java), [test](src/test/java/learn/hyper/practice/AlphabeticalOrderTest.java)
 * Multidimensional array - The star figure: [src](src/main/java/learn/hyper/practice/TheStarFigure.java), [test](src/test/java/learn/hyper/practice/TheStarFigureTest.java)
 * Switch statement - A simple calculator: [src](src/main/java/learn/hyper/practice/SimpleCalculator.java), [test](src/test/java/learn/hyper/practice/SimpleCalculatorTest.java)
+* Iterating over arrays - Check if an array contains two numbers: [src](src/main/java/learn/hyper/practice/ArrayContains.java), [test](src/test/java/learn/hyper/practice/ArrayContainsTest.java)
