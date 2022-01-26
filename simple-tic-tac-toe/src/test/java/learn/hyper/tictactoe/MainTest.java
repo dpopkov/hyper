@@ -21,7 +21,8 @@ class MainTest extends AbstractMainTest {
     @CsvSource({
             "example01-input.txt,example01-output.txt",
             "example02-input.txt,example02-output.txt",
-            "example03-input.txt,example03-output.txt"
+            "example03-input.txt,example03-output.txt",
+            "example04-input.txt,example04-output.txt"
     })
     void testMain(String inputFilename, String expectedOutputFilename) throws IOException {
         Result result = runMainWithTestInputOutput(Main::main,

@@ -10,14 +10,23 @@ public class Grid {
     public static final String HORIZONTAL = "-";
     public static final String VERTICAL = "|";
     public static final char SPACE = ' ';
+    public static final int DEFAULT_GRID_SIZE = 3;
 
     private final int gridSize;
     private final char[][] fields;
+
+    public Grid() {
+        this(DEFAULT_GRID_SIZE);
+    }
 
     public Grid(int gridSize) {
         this.gridSize = gridSize;
         fields = new char[gridSize][gridSize];
         fillFieldsAsEmpty();
+    }
+
+    public char[][] getFields() {
+        return fields;
     }
 
     private void fillFieldsAsEmpty() {
@@ -30,7 +39,7 @@ public class Grid {
         return fields[row][col];
     }
 
-    public void init(String input) {
+    public Grid init(String input) {
         if (input.length() != gridSize * gridSize) {
             throw new IllegalArgumentException(
                     String.format("Cannot use input length %d for grid size %d", input.length(), gridSize));
@@ -50,6 +59,7 @@ public class Grid {
                 throw new IllegalArgumentException("Invalid character for grid: " + symbol);
             }
         }
+        return this;
     }
 
     public String asString() {

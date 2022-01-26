@@ -10,5 +10,7 @@ public class Main {
         String input = scanner.nextLine();
         grid.init(input);
         System.out.print(grid.asString());
+        StateAnalyser analyser = new StateAnalyser(Grid.X, Grid.O, Grid.EMPTY);
+        System.out.println(analyser.analyze(grid.getFields()).getName());
     }
 }

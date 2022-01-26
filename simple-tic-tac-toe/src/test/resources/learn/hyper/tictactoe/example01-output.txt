@@ -1,5 +1,6 @@
 Enter cells: ---------
-| O _ O |
-| X X O |
-| _ X X |
+| X X X |
+| O O _ |
+| _ O _ |
 ---------
+X wins
