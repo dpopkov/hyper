@@ -3,6 +3,8 @@ Enter cells: ---------
 | O O   |
 | O X   |
 ---------
+Enter the coordinates: Coordinates should be from 1 to 3!
+Enter the coordinates: Coordinates should be from 1 to 3!
 Enter the coordinates: ---------
 | X X X |
 | O O   |

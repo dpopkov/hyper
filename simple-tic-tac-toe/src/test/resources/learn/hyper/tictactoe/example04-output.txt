@@ -1,6 +1,10 @@
 Enter cells: ---------
-| X O X |
-| O O X |
-| X X O |
+|   X X |
+| O O   |
+| O X   |
 ---------
-Draw
+Enter the coordinates: ---------
+|   X X |
+| O O X |
+| O X   |
+---------

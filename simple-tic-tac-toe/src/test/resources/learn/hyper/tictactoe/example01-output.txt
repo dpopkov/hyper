@@ -1,6 +1,10 @@
 Enter cells: ---------
-| X X X |
-| O O _ |
-| _ O _ |
+| X   X |
+|   O   |
+|       |
 ---------
-X wins
+Enter the coordinates: ---------
+| X   X |
+|   O   |
+| X     |
+---------

@@ -3,6 +3,8 @@ Enter cells: ---------
 | O O   |
 | O X   |
 ---------
+Enter the coordinates: You should enter numbers!
+Enter the coordinates: You should enter numbers!
 Enter the coordinates: ---------
 | X X X |
 | O O   |

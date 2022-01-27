@@ -4,7 +4,8 @@ import java.util.Arrays;
 
 public class Grid {
     private static final String NL = System.lineSeparator();
-    public static final char EMPTY = '_';
+    public static final char EMPTY_IN = '_';
+    public static final char EMPTY = ' ';
     public static final char X = 'X';
     public static final char O = 'O';
     public static final String HORIZONTAL = "-";
@@ -35,8 +36,16 @@ public class Grid {
         }
     }
 
-    public char getField(int row, int col) {
-        return fields[row][col];
+    public char getField(int rowIndex, int colIndex) {
+        return fields[rowIndex][colIndex];
+    }
+
+    public void setField(int rowIndex, int colIndex, char symbol) {
+        fields[rowIndex][colIndex] = symbol;
+    }
+
+    public boolean isFree(int rowIndex, int colIndex) {
+        return fields[rowIndex][colIndex] == EMPTY;
     }
 
     public Grid init(String input) {
@@ -48,6 +57,9 @@ public class Grid {
         int col = 0;
         for (int i = 0; i < input.length(); i++) {
             char symbol = input.charAt(i);
+            if (symbol == EMPTY_IN) {
+                symbol = EMPTY;
+            }
             if (symbol == X || symbol == O || symbol == EMPTY) {
                 fields[row][col] = symbol;
                 col++;

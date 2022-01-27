@@ -25,7 +25,7 @@ class GridTest {
         grid.init(representation);
         String expected = ""
                 + "X O X" + NL
-                + "O _ O" + NL
+                + "O   O" + NL
                 + "X X O" + NL;
         String actual = grid.asString(false);
         assertEquals(expected, actual);
@@ -39,7 +39,7 @@ class GridTest {
         String expected = ""
                 + "---------" + NL
                 + "| X O X |" + NL
-                + "| O _ O |" + NL
+                + "| O   O |" + NL
                 + "| X X O |" + NL
                 + "---------" + NL;
         String actual = grid.asString(true);
@@ -54,9 +54,9 @@ class GridTest {
         String expected = ""
                 + "-----------" + NL
                 + "| X O X O |" + NL
-                + "| _ O X X |" + NL
+                + "|   O X X |" + NL
                 + "| X X O O |" + NL
-                + "| _ X O _ |" + NL
+                + "|   X O   |" + NL
                 + "-----------" + NL;
         String actual = grid.asString(true);
         assertEquals(expected, actual);
