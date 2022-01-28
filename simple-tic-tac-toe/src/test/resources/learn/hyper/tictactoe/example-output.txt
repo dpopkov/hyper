@@ -1,0 +1,44 @@
+---------
+|       |
+|       |
+|       |
+---------
+Enter the coordinates: ---------
+|       |
+|   X   |
+|       |
+---------
+Enter the coordinates: This cell is occupied! Choose another one!
+Enter the coordinates: You should enter numbers!
+Enter the coordinates: Coordinates should be from 1 to 3!
+Enter the coordinates: ---------
+| O     |
+|   X   |
+|       |
+---------
+Enter the coordinates: ---------
+| O     |
+|   X   |
+|     X |
+---------
+Enter the coordinates: ---------
+| O     |
+| O X   |
+|     X |
+---------
+Enter the coordinates: ---------
+| O     |
+| O X   |
+| X   X |
+---------
+Enter the coordinates: ---------
+| O     |
+| O X O |
+| X   X |
+---------
+Enter the coordinates: ---------
+| O     |
+| O X O |
+| X X X |
+---------
+X wins
