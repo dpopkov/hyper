@@ -13,6 +13,7 @@
         <module>practice</module>
         <module>utils</module>
         <module>simple-tic-tac-toe</module>
+        <module>simple-chatty-bot</module>
     </modules>
 
     <properties>
