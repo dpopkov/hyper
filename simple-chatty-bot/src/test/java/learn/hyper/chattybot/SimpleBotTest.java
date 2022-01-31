@@ -19,7 +19,7 @@ class SimpleBotTest extends AbstractMainTest {
     @Test
     void main() throws IOException {
         Result result = runMainWithTestInputOutput(SimpleBot::main, null,
-                "test02-input.txt", "test02-output.txt");
+                "test03-input.txt", "test03-output.txt");
         assertEquals(result.expected(), result.actual());
     }
 
