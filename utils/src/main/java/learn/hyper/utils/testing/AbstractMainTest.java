@@ -52,6 +52,31 @@ public abstract class AbstractMainTest {
     }
 
     /**
+     * Runs the specified main method reference using test data from the specified expected output filename.
+     * Test data file must be located in the test resources folder according to the package hierarchy.
+     * <p>For example: <code>src/test/resources/learn/hyper/tictactoe/example02-output.txt</code></p>
+     */
+    protected Result runMainWithTestOutput(Consumer<String[]> mainMethodReference,
+                                                String[] mainMethodArgs,
+                                                String expectedOutputDataFilename) throws IOException {
+        String expected;
+        try (
+                InputStream expectedOutput = this.getClass().getResourceAsStream(expectedOutputDataFilename)
+        ) {
+            System.setOut(new PrintStream(buffer));
+
+            if (mainMethodArgs == null) {
+                mainMethodArgs = new String[0];
+            }
+            mainMethodReference.accept(mainMethodArgs);
+
+            expected = new String(expectedOutput.readAllBytes());
+        }
+        String actual = buffer.toString();
+        return new Result(expected, actual);
+    }
+
+    /**
      * Should be called as a tearDown method using @AfterEach annotation.
      */
     protected void tearDownTest() {
