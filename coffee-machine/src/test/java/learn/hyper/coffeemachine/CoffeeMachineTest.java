@@ -17,9 +17,18 @@ class CoffeeMachineTest extends AbstractMainTest {
     }
 
     @Test
-    void testMain() throws IOException {
-        Result result = super.runMainWithTestOutput(CoffeeMachine::main, null,
-                "expected-output.txt");
+    void testMain_01() throws IOException {
+        Result result = super.runMainWithTestInputOutput(CoffeeMachine::main, null,
+                "test-01-input-01.txt",
+                "test-01-output-01.txt");
+        assertEquals(result.expected(), result.actual());
+    }
+
+    @Test
+    void testMain_02() throws IOException {
+        Result result = super.runMainWithTestInputOutput(CoffeeMachine::main, null,
+                "test-01-input-02.txt",
+                "test-01-output-02.txt");
         assertEquals(result.expected(), result.actual());
     }
 

@@ -1,0 +1,5 @@
+Write how many cups of coffee you will need:
+For 25 cups of coffee you will need:
+5000 ml of water
+1250 ml of milk
+375 g of coffee beans

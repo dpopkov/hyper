@@ -1,0 +1,5 @@
+Write how many cups of coffee you will need:
+For 125 cups of coffee you will need:
+25000 ml of water
+6250 ml of milk
+1875 g of coffee beans
