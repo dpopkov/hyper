@@ -17,6 +17,26 @@ public class Ingredients {
         all.put(Ingredient.COFFEE_BEANS, beans);
     }
 
+    public boolean strictlyGreaterOrEqual(Ingredients other) {
+        for (Ingredient i : Ingredient.values()) {
+            if (this.get(i) < other.get(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int canProduceCups(Ingredients perCup) {
+        int result = 0;
+        for (Ingredient i : Ingredient.values()) {
+            int tmp = this.get(i) / perCup.get(i);
+            if (result == 0 || tmp < result) {
+                result = tmp;
+            }
+        }
+        return result;
+    }
+
     public int get(Ingredient ingredient) {
         return all.get(ingredient);
     }

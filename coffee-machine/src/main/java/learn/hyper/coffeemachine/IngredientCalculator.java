@@ -6,6 +6,10 @@ public class IngredientCalculator {
 
     private final Ingredients perCup;
 
+    public IngredientCalculator(Ingredients perCup) {
+        this.perCup = perCup;
+    }
+
     public IngredientCalculator(int waterPerCup, int milkPerCup, int beansPerCup) {
         perCup = new Ingredients(waterPerCup, milkPerCup, beansPerCup);
     }
