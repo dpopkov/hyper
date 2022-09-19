@@ -3,6 +3,7 @@ package learn.hyper.coffeemachine;
 import learn.hyper.utils.testing.AbstractMainTest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -36,6 +37,19 @@ class CoffeeMachineTest extends AbstractMainTest {
         Result result = super.runMainWithTestInputOutput(CoffeeMachine::main, null,
                 inputFile, outputFile);
         assertEquals(result.expected(), result.actual());
+    }
+
+    @Test
+    void testState() {
+        CoffeeMachine machine = new CoffeeMachine(400, 540, 120, 9, 550);
+        String expected = "The coffee machine has:\n" +
+                "400 ml of water\n" +
+                "540 ml of milk\n" +
+                "120 g of coffee beans\n" +
+                "9 disposable cups\n" +
+                "$550 of money";
+        String actual = machine.getState();
+        assertEquals(expected, actual);
     }
 
     @AfterEach
