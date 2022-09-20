@@ -1,0 +1,16 @@
+The coffee machine has:
+400 ml of water
+540 ml of milk
+120 g of coffee beans
+9 disposable cups
+$550 of money
+
+Write action (buy, fill, take):
+What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:
+
+The coffee machine has:
+200 ml of water
+440 ml of milk
+108 g of coffee beans
+8 disposable cups
+$556 of money

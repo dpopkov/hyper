@@ -1,15 +1,15 @@
 package learn.hyper.coffeemachine;
 
-import java.util.Scanner;
-
 public class CoffeeMachine {
+    private final Console console;
     private int water;
     private int milk;
     private int coffeeBeans;
     private int cups;
     private int money;
 
-    public CoffeeMachine(int water, int milk, int coffeeBeans, int cups, int money) {
+    public CoffeeMachine(Console console, int water, int milk, int coffeeBeans, int cups, int money) {
+        this.console = console;
         this.water = water;
         this.milk = milk;
         this.coffeeBeans = coffeeBeans;
@@ -26,42 +26,74 @@ public class CoffeeMachine {
                 "$" + money + " of money";
     }
 
+    public void sellCupOf(Coffee coffee) {
+        water -= coffee.getWater();
+        milk -= coffee.getMilk();
+        coffeeBeans -= coffee.getCoffeeBeans();
+        cups--;
+        money += coffee.getCost();
+    }
+
+    public void fill(Ingredients ingredients, int numCups) {
+        water += ingredients.get(Ingredient.WATER);
+        milk += ingredients.get(Ingredient.MILK);
+        coffeeBeans += ingredients.get(Ingredient.COFFEE_BEANS);
+        cups += numCups;
+    }
+
+    public int take() {
+        int result = money;
+        money = 0;
+        return result;
+    }
+
     public void run() {
-        System.out.println(getState());
-        System.out.println();
-        Scanner in = new Scanner(System.in);
-        System.out.print("Write action (buy, fill, take):\n> ");
-        String action = in.nextLine();
+        console.println(getState());
+        console.println();
+
+        String action = console.readString("Write action (buy, fill, take):");
+
+        if ("buy".equals(action)) {
+            int option = console.readInt("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino:");
+            sellCupOf(Coffee.ordinal(option));
+        } else if ("fill".equals(action)) {
+            int water = console.readInt("Write how many ml of water you want to add:");
+            int milk = console.readInt("Write how many ml of milk you want to add:");
+            int beans = console.readInt("Write how many grams of coffee beans you want to add:");
+            int cups = console.readInt("Write how many disposable cups you want to add:");
+            Ingredients ingredients = new Ingredients(water, milk, beans);
+            fill(ingredients, cups);
+        } else if ("take".equals(action)) {
+            int taken = take();
+            console.println("I gave you $" + taken);
+        }
+        console.println();
+        console.println(getState());
+    }
+
+    int getWater() {
+        return water;
+    }
+
+    int getMilk() {
+        return milk;
+    }
+
+    int getCoffeeBeans() {
+        return coffeeBeans;
+    }
+
+    int getCups() {
+        return cups;
+    }
+
+    int getMoney() {
+        return money;
     }
 
     public static void main(String[] args) {
-        /*
-        Scanner in = new Scanner(System.in);
-        System.out.println("Write how many ml of water the coffee machine has:");
-        int water = in.nextInt();
-        System.out.println("Write how many ml of milk the coffee machine has:");
-        int milk = in.nextInt();
-        System.out.println("Write how many grams of coffee beans the coffee machine has:");
-        int beans = in.nextInt();
-        Ingredients haveIngredients = new Ingredients(water, milk, beans);
-        System.out.println("Write how many cups of coffee you will need:");
-        int numCups = in.nextInt();
-        final Ingredients perCup = new Ingredients(200, 50, 15);
-        IngredientCalculator calculator = new IngredientCalculator(perCup);
-        Ingredients needIngredients = calculator.calculate(numCups);
-
-        int canMakeCups = haveIngredients.canProduceCups(perCup);
-        if (haveIngredients.strictlyGreaterOrEqual(needIngredients)) {
-            if (canMakeCups == numCups) {
-                System.out.println("Yes, I can make that amount of coffee");
-            } else {
-                System.out.printf("Yes, I can make that amount of coffee (and even %d more than that)%n",
-                        (canMakeCups - numCups));
-            }
-        } else {
-            System.out.printf("No, I can make only %d cup(s) of coffee%n", canMakeCups);
-        }
-
-         */
+        Console console = new Console(System.out, System.in);
+        CoffeeMachine machine = new CoffeeMachine(console, 400, 540, 120, 9, 550);
+        machine.run();
     }
 }

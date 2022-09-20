@@ -22,12 +22,9 @@ class CoffeeMachineTest extends AbstractMainTest {
 
     private static Stream<Arguments> testData() {
         return Stream.of(
-                Arguments.of("test-02-input-01.txt", "test-02-output-01.txt"),
-                Arguments.of("test-02-input-02.txt", "test-02-output-02.txt"),
-                Arguments.of("test-02-input-03.txt", "test-02-output-03.txt"),
-                Arguments.of("test-02-input-04.txt", "test-02-output-04.txt"),
-                Arguments.of("test-02-input-05.txt", "test-02-output-05.txt"),
-                Arguments.of("test-02-input-06.txt", "test-02-output-06.txt")
+                Arguments.of("test-03-input-01.txt", "test-03-output-01.txt"),
+                Arguments.of("test-03-input-02.txt", "test-03-output-02.txt"),
+                Arguments.of("test-03-input-03.txt", "test-03-output-03.txt")
         );
     }
 
@@ -41,7 +38,7 @@ class CoffeeMachineTest extends AbstractMainTest {
 
     @Test
     void testState() {
-        CoffeeMachine machine = new CoffeeMachine(400, 540, 120, 9, 550);
+        CoffeeMachine machine = new CoffeeMachine(null, 400, 540, 120, 9, 550);
         String expected = "The coffee machine has:\n" +
                 "400 ml of water\n" +
                 "540 ml of milk\n" +
@@ -50,6 +47,19 @@ class CoffeeMachineTest extends AbstractMainTest {
                 "$550 of money";
         String actual = machine.getState();
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void testSellCupOf() {
+        CoffeeMachine machine = new CoffeeMachine(null, 400, 540, 120, 9, 550);
+
+        machine.sellCupOf(Coffee.CAPPUCCINO);
+
+        assertEquals(200, machine.getWater());
+        assertEquals(440, machine.getMilk());
+        assertEquals(108, machine.getCoffeeBeans());
+        assertEquals(8, machine.getCups());
+        assertEquals(556, machine.getMoney());
     }
 
     @AfterEach
