@@ -6,6 +6,10 @@ import java.util.Objects;
 public class Ingredients {
     private final EnumMap<Ingredient, Integer> all;
 
+    public Ingredients() {
+        this(0, 0, 0);
+    }
+
     public Ingredients(EnumMap<Ingredient, Integer> allIngredients) {
         all = allIngredients;
     }
@@ -39,6 +43,22 @@ public class Ingredients {
 
     public int get(Ingredient ingredient) {
         return all.get(ingredient);
+    }
+
+    public void subtract(Ingredients other) {
+        for (Ingredient ingredient : Ingredient.values()) {
+            int value = all.get(ingredient);
+            value -= other.get(ingredient);
+            all.put(ingredient, value);
+        }
+    }
+
+    public void add(Ingredients other) {
+        for (Ingredient ingredient : Ingredient.values()) {
+            int value = all.get(ingredient);
+            value += other.get(ingredient);
+            all.put(ingredient, value);
+        }
     }
 
     @Override

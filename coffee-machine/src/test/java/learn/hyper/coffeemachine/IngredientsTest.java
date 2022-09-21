@@ -41,4 +41,24 @@ class IngredientsTest {
         int actual = have.canProduceCups(perCup);
         assertEquals(3, actual);
     }
+
+    @Test
+    void testSubtract() {
+        Ingredients target = new Ingredients(2, 3, 4);
+        Ingredients other = new Ingredients(1, 2, 3);
+        target.subtract(other);
+        assertEquals(1, target.get(Ingredient.WATER));
+        assertEquals(1, target.get(Ingredient.MILK));
+        assertEquals(1, target.get(Ingredient.COFFEE_BEANS));
+    }
+
+    @Test
+    void testAdd() {
+        Ingredients target = new Ingredients(2, 3, 4);
+        Ingredients other = new Ingredients(1, 2, 3);
+        target.add(other);
+        assertEquals(3, target.get(Ingredient.WATER));
+        assertEquals(5, target.get(Ingredient.MILK));
+        assertEquals(7, target.get(Ingredient.COFFEE_BEANS));
+    }
 }

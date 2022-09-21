@@ -11,9 +11,12 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.io.IOException;
 import java.util.stream.Stream;
 
+import static learn.hyper.coffeemachine.Ingredient.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CoffeeMachineTest extends AbstractMainTest {
+
+    private final Ingredients initial = new Ingredients(400, 540, 120);
 
     @BeforeEach
     void setUp() {
@@ -38,7 +41,7 @@ class CoffeeMachineTest extends AbstractMainTest {
 
     @Test
     void testState() {
-        CoffeeMachine machine = new CoffeeMachine(null, 400, 540, 120, 9, 550);
+        CoffeeMachine machine = new CoffeeMachine(null, initial, 9, 550);
         String expected = "The coffee machine has:\n" +
                 "400 ml of water\n" +
                 "540 ml of milk\n" +
@@ -51,13 +54,13 @@ class CoffeeMachineTest extends AbstractMainTest {
 
     @Test
     void testSellCupOf() {
-        CoffeeMachine machine = new CoffeeMachine(null, 400, 540, 120, 9, 550);
+        CoffeeMachine machine = new CoffeeMachine(null, initial, 9, 550);
 
         machine.sellCupOf(Coffee.CAPPUCCINO);
 
-        assertEquals(200, machine.getWater());
-        assertEquals(440, machine.getMilk());
-        assertEquals(108, machine.getCoffeeBeans());
+        assertEquals(200, machine.getIngredients().get(WATER));
+        assertEquals(440, machine.getIngredients().get(MILK));
+        assertEquals(108, machine.getIngredients().get(COFFEE_BEANS));
         assertEquals(8, machine.getCups());
         assertEquals(556, machine.getMoney());
     }

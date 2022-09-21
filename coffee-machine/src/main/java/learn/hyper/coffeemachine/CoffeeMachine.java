@@ -1,43 +1,37 @@
 package learn.hyper.coffeemachine;
 
+import static learn.hyper.coffeemachine.Ingredient.*;
+
 public class CoffeeMachine {
     private final Console console;
-    private int water;
-    private int milk;
-    private int coffeeBeans;
+    private final Ingredients ingredients = new Ingredients();
     private int cups;
     private int money;
 
-    public CoffeeMachine(Console console, int water, int milk, int coffeeBeans, int cups, int money) {
+    public CoffeeMachine(Console console, Ingredients initial, int cups, int money) {
         this.console = console;
-        this.water = water;
-        this.milk = milk;
-        this.coffeeBeans = coffeeBeans;
+        ingredients.add(initial);
         this.cups = cups;
         this.money = money;
     }
 
     public String getState() {
         return "The coffee machine has:\n" +
-                water + " ml of water\n" +
-                milk + " ml of milk\n" +
-                coffeeBeans + " g of coffee beans\n" +
+                ingredients.get(WATER) + " ml of water\n" +
+                ingredients.get(MILK) + " ml of milk\n" +
+                ingredients.get(COFFEE_BEANS) + " g of coffee beans\n" +
                 cups + " disposable cups\n" +
                 "$" + money + " of money";
     }
 
     public void sellCupOf(Coffee coffee) {
-        water -= coffee.getWater();
-        milk -= coffee.getMilk();
-        coffeeBeans -= coffee.getCoffeeBeans();
+        ingredients.subtract(coffee.getIngredients());
         cups--;
         money += coffee.getCost();
     }
 
-    public void fill(Ingredients ingredients, int numCups) {
-        water += ingredients.get(Ingredient.WATER);
-        milk += ingredients.get(Ingredient.MILK);
-        coffeeBeans += ingredients.get(Ingredient.COFFEE_BEANS);
+    public void fill(Ingredients other, int numCups) {
+        ingredients.add(other);
         cups += numCups;
     }
 
@@ -71,16 +65,8 @@ public class CoffeeMachine {
         console.println(getState());
     }
 
-    int getWater() {
-        return water;
-    }
-
-    int getMilk() {
-        return milk;
-    }
-
-    int getCoffeeBeans() {
-        return coffeeBeans;
+    Ingredients getIngredients() {
+        return ingredients;
     }
 
     int getCups() {
@@ -93,7 +79,8 @@ public class CoffeeMachine {
 
     public static void main(String[] args) {
         Console console = new Console(System.out, System.in);
-        CoffeeMachine machine = new CoffeeMachine(console, 400, 540, 120, 9, 550);
+        Ingredients initialIngredients = new Ingredients(400, 540, 120);
+        CoffeeMachine machine = new CoffeeMachine(console, initialIngredients, 9, 550);
         machine.run();
     }
 }

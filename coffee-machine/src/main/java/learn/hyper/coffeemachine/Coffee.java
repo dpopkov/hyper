@@ -5,28 +5,16 @@ public enum Coffee {
     LATTE(350, 75, 20, 7),
     CAPPUCCINO(200, 100, 12, 6);
 
-    private final int water;
-    private final int milk;
-    private final int coffeeBeans;
+    private final Ingredients ingredients;
     private final int cost;
 
     Coffee(int water, int milk, int coffeeBeans, int cost) {
-        this.water = water;
-        this.milk = milk;
-        this.coffeeBeans = coffeeBeans;
+        ingredients = new Ingredients(water, milk, coffeeBeans);
         this.cost = cost;
     }
 
-    public int getWater() {
-        return water;
-    }
-
-    public int getMilk() {
-        return milk;
-    }
-
-    public int getCoffeeBeans() {
-        return coffeeBeans;
+    public Ingredients getIngredients() {
+        return ingredients;
     }
 
     public int getCost() {
